@@ -28,6 +28,7 @@ the latest dotfiles, re-applies them, and re-runs `brew bundle`.
 - `private_dot_config/homebrew/` — curated Brewfiles (see its README for the
   Homebrew vs mise split)
 - `private_dot_config/starship.toml` — prompt
+- `dot_vimrc` — vim
 
 ## Day-to-day
 
