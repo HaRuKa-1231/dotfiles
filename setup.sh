@@ -15,7 +15,7 @@ fi
 command -v chezmoi >/dev/null 2>&1 || brew install chezmoi
 
 if [ -d "$HOME/.local/share/chezmoi/.git" ]; then
-  chezmoi apply
+  chezmoi update
 else
   chezmoi init --apply HaRuKa-1231
 fi
