@@ -1,0 +1,8 @@
+---
+name: perm-claude
+windows:
+  - tabs:
+      - layout:
+          cwd: /Users/haruka-itoh/development/perm
+          commands:
+            - exec: claude

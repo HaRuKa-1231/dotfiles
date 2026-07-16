@@ -1,0 +1,8 @@
+---
+name: enabling-utils-claude
+windows:
+  - tabs:
+      - layout:
+          cwd: /Users/haruka-itoh/development/enabling-utils
+          commands:
+            - exec: claude

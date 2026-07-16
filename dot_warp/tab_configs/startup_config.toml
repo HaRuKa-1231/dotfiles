@@ -1,0 +1,8 @@
+name = "New tab: haruka-itoh"
+
+[[panes]]
+id = "main"
+type = "agent"
+directory = "/Users/haruka-itoh"
+
+[params]

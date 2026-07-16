@@ -1,0 +1,7 @@
+---
+"workspace:new_tab": cmd-t
+"editor_view:insert_autosuggestion": shift-right
+"input:open_completion_suggestions": tab
+/cloud-agent: none
+"workspace:show_settings_account_page": none
+/agent: none
