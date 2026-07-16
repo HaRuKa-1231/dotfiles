@@ -1,0 +1,26 @@
+syntax on
+colorscheme darkblue
+hi Comment ctermfg=3
+
+set number
+set title
+set cursorline
+set cursorcolumn
+set list
+set laststatus=2
+set mouse=a
+set virtualedit=onemore
+
+set expandtab
+set tabstop=2
+set shiftwidth=4
+set smartindent
+
+set ignorecase
+set wrapscan
+
+augroup MyXML
+  autocmd!
+  autocmd Filetype xml inoremap <buffer> </ </<C-x><C-o>
+  autocmd Filetype html inoremap <buffer> </ </<C-x><C-o>
+augroup END
