@@ -1,0 +1,8 @@
+# Browsers and daily desktop apps
+cask "arc"
+
+# AI/dev desktop tools
+cask "codex"
+
+# Fonts used by terminal prompts and icons
+cask "font-plemol-jp-nf"

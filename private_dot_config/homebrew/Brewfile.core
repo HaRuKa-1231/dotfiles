@@ -1,0 +1,26 @@
+# Dotfiles and shell bootstrap
+brew "chezmoi"
+brew "zsh"
+brew "starship"
+brew "zsh-autosuggestions"
+brew "zsh-syntax-highlighting"
+brew "zsh-completions"
+brew "fzf"
+brew "zoxide"
+
+# Git and GitHub
+brew "git"
+brew "gh"
+brew "git-lfs"
+brew "difftastic"
+
+# Cross-project CLI utilities
+brew "bat"
+brew "eza"
+brew "ripgrep"
+brew "jq"
+brew "gnu-sed"
+
+# Keep runtime/toolchain versions in mise, not Homebrew:
+# node, npm, pnpm, yarn, ruby, python, uv, deno, bun, go,
+# lefthook, actionlint, duckdb, vercel, gws, gemini, happy.
