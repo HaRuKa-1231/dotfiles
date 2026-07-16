@@ -1,3 +1,5 @@
+bindkey -e
+
 autoload -Uz colors
 colors
 
