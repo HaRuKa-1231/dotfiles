@@ -1,0 +1,1 @@
+# Keep .zshenv minimal: it is sourced by every zsh, including non-interactive shells.

@@ -1,0 +1,28 @@
+# Keep this file as a small entrypoint. Most settings live in ~/.config/zsh/*.zsh.
+
+ZSH_CONFIG_DIR="${ZSH_CONFIG_DIR:-$HOME/.config/zsh}"
+
+zsh_config_files=(
+  path.zsh
+  completion.zsh
+  framework.zsh
+  options.zsh
+  prompt.zsh
+  aliases.zsh
+  tools.zsh
+  cloud.zsh
+  work.zsh
+  secrets.zsh
+  shell-integrations.zsh
+)
+
+for zsh_config_file in "${zsh_config_files[@]}"; do
+  zsh_config_path="$ZSH_CONFIG_DIR/$zsh_config_file"
+  [[ -r "$zsh_config_path" ]] && source "$zsh_config_path"
+done
+
+unset zsh_config_file zsh_config_files zsh_config_path
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/haruka-itoh/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)

@@ -1,0 +1,92 @@
+add_newline = false
+command_timeout = 2000
+format = """
+${custom.aws_prod}\
+${custom.aws}\
+$status\
+$directory\
+${custom.git_segment}\
+${custom.no_git}\
+$line_break\
+$character"""
+right_format = "$time"
+
+[custom.aws_prod]
+when = 'case "$AWSUME_PROFILE" in *prod*|*prd*|*production*) exit 0;; *) exit 1;; esac'
+command = 'printf "%s" "$AWSUME_PROFILE"'
+format = '[ AWS: $output ]($style)[](fg:red bg:blue)'
+style = 'fg:yellow bg:red'
+
+[custom.aws]
+when = 'test -n "$AWSUME_PROFILE" && case "$AWSUME_PROFILE" in *prod*|*prd*|*production*) exit 1;; *) exit 0;; esac'
+command = 'printf "%s" "$AWSUME_PROFILE"'
+format = '[ AWS: $output ]($style)[](fg:green bg:blue)'
+style = 'fg:black bg:green'
+
+[directory]
+format = '[ $path ]($style)[$read_only]($read_only_style)'
+style = 'fg:black bg:blue'
+read_only = ' ro'
+read_only_style = 'fg:red bg:blue'
+truncation_length = 3
+truncate_to_repo = false
+
+[custom.git_segment]
+when = 'git rev-parse --is-inside-work-tree >/dev/null 2>&1'
+shell = ['/bin/sh']
+command = '''
+branch=$(git symbolic-ref --short HEAD 2>/dev/null)
+if [ -z "$branch" ]; then
+  commit=$(git rev-parse --short HEAD 2>/dev/null)
+  branch="➦ $commit"
+else
+  branch=" $branch"
+fi
+
+mode=""
+if [ -e "$(git rev-parse --git-path BISECT_LOG 2>/dev/null)" ]; then
+  mode=" <B>"
+elif [ -e "$(git rev-parse --git-path MERGE_HEAD 2>/dev/null)" ]; then
+  mode=" >M<"
+elif [ -d "$(git rev-parse --git-path rebase-apply 2>/dev/null)" ] || [ -d "$(git rev-parse --git-path rebase-merge 2>/dev/null)" ]; then
+  mode=" >R>"
+fi
+
+status=$(git status --porcelain=v1 --untracked-files=normal --ignore-submodules=dirty 2>/dev/null)
+symbols=""
+printf "%s\n" "$status" | grep -q '^[MARCDT]' && symbols="${symbols}✚"
+printf "%s\n" "$status" | grep -q '^.[MDT]' && symbols="${symbols}●"
+printf "%s\n" "$status" | grep -q '^??' && symbols="${symbols}?"
+
+if [ -n "$symbols" ]; then
+  printf '\033[43;34m\033[43;30m %s %s%s \033[0m\033[33m\033[0m' "$branch" "$symbols" "$mode"
+else
+  printf '\033[42;34m\033[42;30m %s%s \033[0m\033[32m\033[0m' "$branch" "$mode"
+fi
+'''
+format = '$output'
+unsafe_no_escape = true
+
+[custom.no_git]
+when = 'test -z "$(git rev-parse --is-inside-work-tree 2>/dev/null)"'
+shell = ['/bin/sh']
+command = 'true'
+format = '[](fg:blue)'
+
+[status]
+disabled = false
+format = '[ ✘ ]($style)[](fg:black bg:blue)'
+style = 'fg:red bg:black'
+map_symbol = false
+
+[time]
+disabled = false
+utc_time_offset = '+9'
+time_format = '%Y-%m-%d %H:%M'
+format = '[$time]($style)'
+style = 'yellow'
+
+[character]
+success_symbol = '[❯](bold green)'
+error_symbol = '[❯](bold red)'
+vimcmd_symbol = '[❮](bold green)'
